@@ -1,0 +1,27 @@
+DEFGATE H:
+    1/sqrt(2), 1/sqrt(2)
+    1/sqrt(2), -1/sqrt(2)
+
+DEFGATE CNOT: 
+    1, 0, 0, 0
+    0, 1, 0, 0
+    0, 0, 0, 1
+    0, 0, 1, 0
+
+DEFCIRCUIT BELL x y:
+    H x
+    CNOT x y
+    
+BELL 0 1
+MEASURE 0 [0]
+
+
+# When you run this on the QAM the following should happen:
+# 1. The QAM is initialised with some number of qubits
+# 2. The static gates H and CNOT are loaded into the QAM. 
+# 3. There are no dynamic gates in this example, but if there were then they'd be loaded too. 
+# 4. The program (lines 14 and 15) is compiled into pure quil. (All DEFCIRCUITs are expanded.)
+# 5. The pure quil program is loaded, program counter set to 0. 
+# 6. The starting state is |00000>, note this is not the zero vector! It has norm 1. 
+# The starting state for the Classical Register is also all 0's. 
+# 7. The program is executed line by line. 
